@@ -31,8 +31,13 @@
 #include "main.hpp"
 
 AutoreleasePool global_pool;
+Logger logger;
 
 int main(int argc, char** argv) {
-	global_pool = AutoreleasePool();
 	global_pool.appendReleaseFunction(process_cleanup);
+
+	// do stuff...
+	
+	global_pool.drain();
+	return 0;
 }

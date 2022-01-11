@@ -34,4 +34,6 @@
 #include "autorelease.hpp"
 #include "processor.hpp"
 
+extern Logger logger;
+
 #endif // MAIN_HPP

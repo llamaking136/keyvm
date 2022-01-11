@@ -29,3 +29,7 @@
 
 
 #include "processor.hpp"
+
+void process_cleanup() {
+	logger.log("Process cleanup");
+}

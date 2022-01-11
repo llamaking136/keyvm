@@ -82,6 +82,10 @@ namespace ASM {
 		JGE = 0x24,
 		JG = 0x25,
 
+		SYSCALL = 0x26,
+
+		JMP = 0x27
+
 		HLT = 0xFF
 	};
 

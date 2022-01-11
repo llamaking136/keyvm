@@ -36,6 +36,7 @@
 
 class AutoreleasePool {
 	private:
+		bool didDrain;
 		std::vector<void (*)()> releaseFunctions;
 	public:
 		 AutoreleasePool();

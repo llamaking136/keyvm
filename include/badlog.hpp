@@ -1,7 +1,7 @@
 //
-// autorelease.cpp
+// badlog.hpp
 //
-// created at 24/07/2021 17:45:13
+// created at 17/12/2021 20:56:06
 // written by llamaking136
 //
 
@@ -28,29 +28,48 @@
 // SOFTWARE.
 
 
-#include "autorelease.hpp"
+#if !defined(BADLOG_HPP)
+#define BADLOG_HPP
 
-AutoreleasePool::AutoreleasePool() { this->didDrain = false; }
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <string.h>
 
-AutoreleasePool::~AutoreleasePool() {
-	if (!this->didDrain)
-		this->drain();
-}
+// idfk how this works, good luck
 
-unsigned long AutoreleasePool::size() {
-	return this->releaseFunctions.size();
-}
+enum LogLevel {
+	Fatal,
+	Error,
+	Warning,
+	Info,
+	Debug,
+	Null
+};
 
-void AutoreleasePool::appendReleaseFunction(void (*function)()) {
-	this->releaseFunctions.push_back(function);
-}
+struct LogLevelConfig {
+	LogLevel level;
+	std::string name;
+	std::string color;
+};
 
-void AutoreleasePool::drain() {
-	void (*current_release_function)();
+class Logger {
+	private:
+		bool useStd;
+		std::ofstream outStream;
+		LogLevelConfig defaultLevel;
+		LogLevelConfig configs[5];
+		std::string outfilename;
+		void setup();
 
-	for (unsigned long i = 0; i < this->releaseFunctions.size(); i++) {
-		current_release_function = this->releaseFunctions[i];
-		current_release_function();
-	}
-	this->didDrain = true;
-}
+	public:
+		 Logger();
+		 Logger(std::string);
+		~Logger();
+		// void defaultLevel(LogLevel);
+		void log(std::string);
+		void log(LogLevel, std::string);
+};
+
+#endif // BADLOG_HPP

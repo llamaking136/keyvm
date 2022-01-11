@@ -33,6 +33,9 @@
 
 #include <string>
 #include <vector>
+#include <badlog.hpp>
+
+extern Logger logger;
 
 void process_cleanup();
 
